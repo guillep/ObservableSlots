@@ -1,3 +1,9 @@
+"
+I am a point used to test observable properties.
+I have an observable property x and a non-observable property y.
+
+I use TObservable that has methods to ease the usage of my observable properties.
+"
 Class {
 	#name : #ObservablePoint,
 	#superclass : #Object,
@@ -5,7 +11,7 @@ Class {
 	#classTraits : 'TObservable classTrait',
 	#instVars : [
 		'#x => ObservableSlot',
-		'#y => ObservableSlot'
+		'#y'
 	],
 	#category : #ObservableSlot
 }

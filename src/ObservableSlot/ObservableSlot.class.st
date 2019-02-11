@@ -10,6 +10,12 @@ ObservableSlot >> initialize: anObject [
 	super write: nil asValueHolder to: anObject
 ]
 
+{ #category : #testing }
+ObservableSlot >> isObservableSlot [
+	
+	^ true
+]
+
 { #category : #initialization }
 ObservableSlot >> read: anObject [
 

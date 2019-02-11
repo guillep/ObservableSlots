@@ -55,7 +55,7 @@ ObservableSlotTest >> testExplicitNotifyUnexistentPropertyChangedRaisesError [
 
 	self
 		should: [ point notifyPropertyChanged: #z ]
-		raise: InstanceVariableNotFound
+		raise: SlotNotFound
 ]
 
 { #category : #tests }
@@ -97,7 +97,7 @@ ObservableSlotTest >> testSubscribeToUnexistentPropertyRaisesError [
 	self
 		should: [
 			point
-				property: #z
+				property: #y
 				whenChangedDo: [ self fail: 'This event shouldnt have been subscribed at all' ] ]
-		raise: InstanceVariableNotFound
+		raise: NonObservableSlotError
 ]
