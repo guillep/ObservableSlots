@@ -1,6 +1,8 @@
 Class {
 	#name : #ObservablePoint,
 	#superclass : #Object,
+	#traits : 'TObservable',
+	#classTraits : 'TObservable classTrait',
 	#instVars : [
 		'#x => ObservableSlot',
 		'#y => ObservableSlot'
