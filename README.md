@@ -78,7 +78,12 @@ That could be done by doing:
 point notifyPropertyChanged: #x.
 ```
 
-## Expected exceptions
+## Exceptions
 
 If the property we want to subscribe or notify to does not exist a `SlotNotFound` will be risen.
 If the property exists but is not observable a `NonObservableSlotError` will be risen.
+
+
+# Implementation Details
+
+This implementation uses a `ValueHolder` to capture changes, and Slots to intercept reading and writing.
