@@ -1,15 +1,24 @@
 Class {
 	#name : #ObservableSlotTest,
 	#superclass : #TestCase,
+	#instVars : [
+		'point'
+	],
 	#category : #ObservableSlot
 }
 
 { #category : #tests }
+ObservableSlotTest >> setUp [
+
+	super setUp.
+	point := ObservablePoint new.
+]
+
+{ #category : #tests }
 ObservableSlotTest >> testChangeInInstanceVariableRaisesEventOnlyOnce [
 
-	| point  count |
+	|  count |
 	count := 0.
-	point := ObservablePoint new.
 	point property: #x whenChangedDo: [ count := count + 1 ].
 
 	point x: 17.
@@ -20,9 +29,8 @@ ObservableSlotTest >> testChangeInInstanceVariableRaisesEventOnlyOnce [
 { #category : #tests }
 ObservableSlotTest >> testExplicitNotificationRaisesEventOnlyOnce [
 
-	| point  count |
+	| count |
 	count := 0.
-	point := ObservablePoint new.
 	point property: #x whenChangedDo: [ count := count + 1 ].
 
 	point notifyPropertyChanged: #x.
@@ -33,8 +41,7 @@ ObservableSlotTest >> testExplicitNotificationRaisesEventOnlyOnce [
 { #category : #tests }
 ObservableSlotTest >> testExplicitNotificationRaisesEventWithNewValue [
 
-	| point newValue |
-	point := ObservablePoint new.
+	| newValue |
 	point x: 17.
 	point property: #x whenChangedDo: [ :new | newValue := new ].
 
@@ -44,10 +51,16 @@ ObservableSlotTest >> testExplicitNotificationRaisesEventWithNewValue [
 ]
 
 { #category : #tests }
+ObservableSlotTest >> testExplicitNotifyUnexistentPropertyChangedRaisesError [
+
+	self
+		should: [ point notifyPropertyChanged: #z ]
+		raise: InstanceVariableNotFound
+]
+
+{ #category : #tests }
 ObservableSlotTest >> testObservableSlotWorksAsNormalSlot [
 
-	| point |
-	point := ObservablePoint new.
 	point x: 17.
 	point y: 299.
 	
@@ -58,9 +71,8 @@ ObservableSlotTest >> testObservableSlotWorksAsNormalSlot [
 { #category : #tests }
 ObservableSlotTest >> testSubscribeBlockWithoutParametersIsCalled [
 
-	| point  called |
+	| called |
 	called := false.
-	point := ObservablePoint new.
 	point property: #x whenChangedDo: [ called := true ].
 
 	point x: 17.
@@ -71,11 +83,21 @@ ObservableSlotTest >> testSubscribeBlockWithoutParametersIsCalled [
 { #category : #tests }
 ObservableSlotTest >> testSubscribeToChangeRaisesEventWithNewValue [
 
-	| point newValue |
-	point := ObservablePoint new.
+	| newValue |
 	point property: #x whenChangedDo: [ :new | newValue := new ].
 
 	point x: 17.
 
 	self assert: newValue equals: 17.
+]
+
+{ #category : #tests }
+ObservableSlotTest >> testSubscribeToUnexistentPropertyRaisesError [
+
+	self
+		should: [
+			point
+				property: #z
+				whenChangedDo: [ self fail: 'This event shouldnt have been subscribed at all' ] ]
+		raise: InstanceVariableNotFound
 ]
