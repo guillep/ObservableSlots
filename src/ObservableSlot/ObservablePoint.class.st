@@ -22,12 +22,6 @@ ObservablePoint >> initialize [
 	self class initializeSlots: self.
 ]
 
-{ #category : #events }
-ObservablePoint >> notifyPropertyChanged: aName [
-
-	(self observablePropertyNamed: aName) valueChanged
-]
-
 { #category : #accessing }
 ObservablePoint >> x [
 	^ x

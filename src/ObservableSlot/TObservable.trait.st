@@ -4,6 +4,12 @@ Trait {
 }
 
 { #category : #events }
+TObservable >> notifyPropertyChanged: aName [
+
+	(self observablePropertyNamed: aName) valueChanged
+]
+
+{ #category : #events }
 TObservable >> observablePropertyNamed: aName [
 	
 	(self class slotNamed: aName) isObservableSlot
