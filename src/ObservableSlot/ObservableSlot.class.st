@@ -44,6 +44,12 @@ ObservableSlot >> read: anObject [
 ]
 
 { #category : #initialization }
+ObservableSlot >> wantsInitalization [
+
+	^ true
+]
+
+{ #category : #initialization }
 ObservableSlot >> write: aValue to: anObject [
 
 	(super read: anObject) value: aValue.

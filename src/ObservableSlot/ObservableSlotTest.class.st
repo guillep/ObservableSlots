@@ -92,7 +92,7 @@ ObservableSlotTest >> testSubscribeToChangeRaisesEventWithNewValue [
 ]
 
 { #category : #tests }
-ObservableSlotTest >> testSubscribeToUnexistentPropertyRaisesError [
+ObservableSlotTest >> testSubscribeToExistentNonObservablePropertyRaisesError [
 
 	self
 		should: [
@@ -100,4 +100,15 @@ ObservableSlotTest >> testSubscribeToUnexistentPropertyRaisesError [
 				property: #y
 				whenChangedDo: [ self fail: 'This event shouldnt have been subscribed at all' ] ]
 		raise: NonObservableSlotError
+]
+
+{ #category : #tests }
+ObservableSlotTest >> testSubscribeToUnexistentPropertyRaisesError [
+
+	self
+		should: [
+			point
+				property: #z
+				whenChangedDo: [ self fail: 'This event shouldnt have been subscribed at all' ] ]
+		raise: SlotNotFound
 ]
