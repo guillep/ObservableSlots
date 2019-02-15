@@ -4,9 +4,14 @@ Pharo language extension to have slots that announce changes
 
 # Installation
 
-Clone this project with Iceberg and load the single package.
-Check the tutorial in [here](https://github.com/pharo-vcs/iceberg/wiki/Tutorial).
-This project will be soon integrated as part of the Pharo distribution or the Spec UI framework.
+Execute the following lines in a playground:
+
+```smalltalk
+Metacello new
+    baseline: 'ObservableSlot';
+    repository: 'github://guillep/ObservableSlots/src';
+    load.
+```
 
 # Usage
 
